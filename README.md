@@ -1,29 +1,22 @@
-# Welcome to your Lovable project
+# CareFlow – Hospital Management System
 
-This project was built with [Lovable](https://lovable.dev).
+A simple, beginner-friendly hospital management web app built for a college project demo.
 
-## Build with Lovable
+## Modules
+1. **Dashboard** – live totals from the database (patients, doctors, today's booked appointments, pending emergencies), recent appointments, queue preview, quick actions.
+2. **Patients** – add / search (name, ID, contact) / view / edit / delete. Name required, age 1–120. Patients with appointments or emergencies cannot be deleted (history protected).
+3. **Doctors** – add / search (name, specialization) / view / edit availability / delete. Doctors with appointments cannot be deleted.
+4. **Appointments** – book (existing patient + doctor, date, time), view, cancel (status → Cancelled, never deleted), filter by date/status, search. A unique database index on (doctor, date, time) where status = 'Booked' blocks double-booking; cancelled rows don't block a slot.
+5. **Emergency Queue** – priority queue. Priority 1 Critical, 2 Serious, 3 Moderate, 4 Minor. Ordered by priority ASC, then arrival time. "Process next" calls a database function that picks the lowest-numbered pending case (row-locked) and marks it Processed. Empty queue shows "No pending emergency cases".
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+## Access
+All records require a signed-in staff account (email + password). Row-level security blocks anonymous access.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## Technology note
+The milestone design specifies **Python 3.14 + MySQL (Hospital_DB)**. This hosted version uses managed **PostgreSQL** (Lovable Cloud) because that is the platform's database. It is **not** connected to a local MySQL or Python program. The same four-table model and rules are used; an equivalent MySQL schema is shown on the Settings page.
 
-## Development
+## Demo data
+Settings → "Load demo data" adds records labelled "Demo – …" (flag `is_demo`). "Remove demo data" deletes only those.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## Tests
+`bunx vitest run` – validation rules (name, age, priority) and queue ordering (3,1,4,2 → 1,2,3,4).
