@@ -48,6 +48,9 @@ function Index() {
           <Button asChild size="lg"><Link to="/auth">Sign in to start</Link></Button>
           <Button asChild size="lg" variant="outline"><Link to="/about">How it works</Link></Button>
         </div>
+        <p className="mt-6 text-sm text-muted-foreground">
+          New here? After signing in, open Settings and click "Load demo data" to fill the system with sample patients, doctors and appointments for a quick demo.
+        </p>
       </section>
       <section className="mx-auto grid max-w-5xl gap-4 px-6 pb-20 sm:grid-cols-2 lg:grid-cols-4">
         {modules.map((m) => (
