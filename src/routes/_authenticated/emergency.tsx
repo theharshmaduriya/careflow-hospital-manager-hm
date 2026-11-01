@@ -65,7 +65,7 @@ function EmergencyPage() {
         {[1, 2, 3, 4].map((p) => (
           <div key={p} className="rounded-xl border bg-card p-3 shadow-card">
             <PriorityBadge priority={p} />
-            <p className="mt-2 text-sm text-muted-foreground">{PRIORITY_INFO[p].meaning}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{PRIORITY_INFO[p]!.meaning}</p>
           </div>
         ))}
       </div>
@@ -126,7 +126,7 @@ function EmergencyPage() {
         onOpenChange={setConfirm}
         destructive={false}
         title="Process next emergency?"
-        description={next ? `Next up: ${next.patient?.name} — "${next.condition}" (priority ${next.priority}, ${PRIORITY_INFO[next.priority].label}). It will be marked as Processed.` : ""}
+        description={next ? `Next up: ${next.patient?.name} — "${next.condition}" (priority ${next.priority}, ${PRIORITY_INFO[next.priority]!.label}). It will be marked as Processed.` : ""}
         confirmLabel="Mark as processed"
         onConfirm={() => proc.mutate()}
       />
@@ -183,7 +183,7 @@ function AddEmergency({ onClose }: { onClose: () => void }) {
                 {[1, 2, 3, 4].map((p) => (
                   <label key={p} className={cn("flex cursor-pointer items-start gap-2 rounded-lg border p-3 text-sm transition focus-within:ring-2 focus-within:ring-ring", form.priority === String(p) && "border-primary bg-primary-soft")}>
                     <input type="radio" name="priority" value={p} checked={form.priority === String(p)} onChange={() => setForm((f) => ({ ...f, priority: String(p) }))} className="mt-1 accent-primary" />
-                    <span><PriorityBadge priority={p} /><span className="mt-1 block text-xs text-muted-foreground">{PRIORITY_INFO[p].meaning}</span></span>
+                    <span><PriorityBadge priority={p} /><span className="mt-1 block text-xs text-muted-foreground">{PRIORITY_INFO[p]!.meaning}</span></span>
                   </label>
                 ))}
               </div>

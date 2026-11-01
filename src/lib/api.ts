@@ -208,16 +208,16 @@ export async function loadDemoData() {
   );
   must(
     await supabase.from("appointment").insert([
-      { patient_id: pats[0].patient_id, doctor_id: docs[1].doctor_id, appointment_date: todayISO(), appointment_time: "10:00", is_demo: true },
-      { patient_id: pats[2].patient_id, doctor_id: docs[0].doctor_id, appointment_date: todayISO(), appointment_time: "11:30", is_demo: true },
+      { patient_id: pats[0]!.patient_id, doctor_id: docs[1]!.doctor_id, appointment_date: todayISO(), appointment_time: "10:00", is_demo: true },
+      { patient_id: pats[2]!.patient_id, doctor_id: docs[0]!.doctor_id, appointment_date: todayISO(), appointment_time: "11:30", is_demo: true },
     ]),
   );
   must(
     await supabase.from("emergency").insert([
-      { patient_id: pats[1].patient_id, condition: "Sprained ankle", priority: 3, is_demo: true },
-      { patient_id: pats[2].patient_id, condition: "Severe chest pain", priority: 1, is_demo: true },
-      { patient_id: pats[3].patient_id, condition: "Small cut on hand", priority: 4, is_demo: true },
-      { patient_id: pats[0].patient_id, condition: "Breathing difficulty", priority: 2, is_demo: true },
+      { patient_id: pats[1]!.patient_id, condition: "Sprained ankle", priority: 3, is_demo: true },
+      { patient_id: pats[2]!.patient_id, condition: "Severe chest pain", priority: 1, is_demo: true },
+      { patient_id: pats[3]!.patient_id, condition: "Small cut on hand", priority: 4, is_demo: true },
+      { patient_id: pats[0]!.patient_id, condition: "Breathing difficulty", priority: 2, is_demo: true },
     ]),
   );
 }

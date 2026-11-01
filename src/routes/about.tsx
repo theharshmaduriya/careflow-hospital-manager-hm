@@ -54,7 +54,7 @@ function About() {
           <p>Each case gets a priority from 1 to 4. The queue is <strong>priority-ordered, not first-come-first-served</strong>: the lowest number is treated first. If two cases share a priority, the one that arrived earlier goes first.</p>
           <div className="grid gap-2 py-2 sm:grid-cols-2">
             {[1, 2, 3, 4].map((p) => (
-              <div key={p} className="flex items-center gap-2"><PriorityBadge priority={p} /> {PRIORITY_INFO[p].meaning}</div>
+              <div key={p} className="flex items-center gap-2"><PriorityBadge priority={p} /> {PRIORITY_INFO[p]!.meaning}</div>
             ))}
           </div>
           <p>Example: cases added with priorities 3, 1, 4, 2 are processed in the order 1, 2, 3, 4. "Process next" marks that case <em>Processed</em> in the database. An empty queue simply shows "No pending emergency cases".</p>
