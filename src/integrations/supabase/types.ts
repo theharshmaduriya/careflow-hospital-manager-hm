@@ -14,13 +14,188 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointment: {
+        Row: {
+          appointment_date: string
+          appointment_id: number
+          appointment_time: string
+          created_at: string
+          doctor_id: number
+          is_demo: boolean
+          patient_id: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          appointment_date: string
+          appointment_id?: never
+          appointment_time: string
+          created_at?: string
+          doctor_id: number
+          is_demo?: boolean
+          patient_id: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          appointment_date?: string
+          appointment_id?: never
+          appointment_time?: string
+          created_at?: string
+          doctor_id?: number
+          is_demo?: boolean
+          patient_id?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointment_doctor_id_fkey"
+            columns: ["doctor_id"]
+            isOneToOne: false
+            referencedRelation: "doctor"
+            referencedColumns: ["doctor_id"]
+          },
+          {
+            foreignKeyName: "appointment_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patient"
+            referencedColumns: ["patient_id"]
+          },
+        ]
+      }
+      doctor: {
+        Row: {
+          availability: string | null
+          created_at: string
+          doctor_id: number
+          is_demo: boolean
+          name: string
+          specialization: string | null
+          updated_at: string
+        }
+        Insert: {
+          availability?: string | null
+          created_at?: string
+          doctor_id?: never
+          is_demo?: boolean
+          name: string
+          specialization?: string | null
+          updated_at?: string
+        }
+        Update: {
+          availability?: string | null
+          created_at?: string
+          doctor_id?: never
+          is_demo?: boolean
+          name?: string
+          specialization?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      emergency: {
+        Row: {
+          condition: string
+          created_at: string
+          emergency_id: number
+          is_demo: boolean
+          patient_id: number
+          priority: number
+          processed_at: string | null
+          status: string
+        }
+        Insert: {
+          condition: string
+          created_at?: string
+          emergency_id?: never
+          is_demo?: boolean
+          patient_id: number
+          priority: number
+          processed_at?: string | null
+          status?: string
+        }
+        Update: {
+          condition?: string
+          created_at?: string
+          emergency_id?: never
+          is_demo?: boolean
+          patient_id?: number
+          priority?: number
+          processed_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "emergency_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patient"
+            referencedColumns: ["patient_id"]
+          },
+        ]
+      }
+      patient: {
+        Row: {
+          age: number | null
+          contact: string | null
+          created_at: string
+          gender: string | null
+          is_demo: boolean
+          medical_info: string | null
+          name: string
+          patient_id: number
+          updated_at: string
+        }
+        Insert: {
+          age?: number | null
+          contact?: string | null
+          created_at?: string
+          gender?: string | null
+          is_demo?: boolean
+          medical_info?: string | null
+          name: string
+          patient_id?: never
+          updated_at?: string
+        }
+        Update: {
+          age?: number | null
+          contact?: string | null
+          created_at?: string
+          gender?: string | null
+          is_demo?: boolean
+          medical_info?: string | null
+          name?: string
+          patient_id?: never
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      process_next_emergency: {
+        Args: never
+        Returns: {
+          condition: string
+          created_at: string
+          emergency_id: number
+          is_demo: boolean
+          patient_id: number
+          priority: number
+          processed_at: string | null
+          status: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "emergency"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
     }
     Enums: {
       [_ in never]: never
